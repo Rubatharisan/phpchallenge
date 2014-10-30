@@ -76,8 +76,4 @@ class page{
         return $this;
     }
 }
-
-$page = new page();
-$page->setPageHeader("Hello world");
-echo $page->getPageHeader();
 ?>

@@ -21,7 +21,7 @@ ini_set('display_errors', '1');
 		$page->setPageHeader("My PHP Challenge");
 		$page->setPageText("- It must automatically translate an HTML template with placeholders into a HTML string with placeholders replaced by the corresponding values.<br>
 		- It must be possible to supply an object or array with key-value pairs, where key indicates the placeholder that must be replaced by the value. <br> <b>NOTE: This code uses Twitter Bootstrap only for styling - if this is not allowed, please let me redo this work. <br>
-	NOTE: This code is not made in a object-oriented manner - if this is not allowed, please let me redo this work.</b>");
+	</b>");
 
 		// If GET request is set, use values from this.
 			if(isset($_GET['pageTitle']) && !$_GET['pageTitle'] == null){
@@ -83,7 +83,7 @@ ini_set('display_errors', '1');
 		<!-- meta defining viewpoint and which scalling -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- setting title of page -->
-		<title><?php echo $pageTitle; ?></title>
+		<title><?php echo $page->getPageTitle(); ?></title>
 
 		<!-- Bootstrap CSS -->
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -133,9 +133,9 @@ ini_set('display_errors', '1');
 			</div>
 			<div class="col-md-8">
 			<center>
-				<h1> <?php echo $pageHeader; ?> </h1>
+				<h1> <?php echo $page->getPageHeader(); ?> </h1>
 				<hr>
-				<p><?php echo $pageText; ?></p>
+				<p><?php echo $page->getPageText(); ?></p>
 			</center>
 			<hr>
 			</div>
@@ -184,6 +184,11 @@ ini_set('display_errors', '1');
 					echo "<br>";
 					print_r($pageJsoned);
 				}
+
+			// var dump of page object
+				echo "<br><b>Vardump of page object: </b><i style='word-wrap: break-word;'><br>";
+				var_dump($page);
+				echo "</i>";
 			?>
 			</div>
 		</div>
