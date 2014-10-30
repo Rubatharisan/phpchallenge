@@ -9,40 +9,44 @@ ini_set('display_errors', '1');
 	NOTE: This code uses Twitter Bootstrap only for styling - if this is not allowed, please let me redo this work.
 	NOTE: This code is not made in a object-oriented manner - if this is not allowed, please let me redo this work.
 */
+
+		// including page class
 		include('page.class.php');
+
+		// Creating page object
 		$page = new page();
-		
+
 		// Setting standard page title, header and text
-		$pageTitle 	= 	"PHP Challenge";
-		$pageHeader = 	"My PHP Challenge";
-		$pageText 	= 	"- It must automatically translate an HTML template with placeholders into a HTML string with placeholders replaced by the corresponding values.<br>
+		$page->setPageTitle("PHP Challenge");
+		$page->setPageHeader("My PHP Challenge");
+		$page->setPageText("- It must automatically translate an HTML template with placeholders into a HTML string with placeholders replaced by the corresponding values.<br>
 		- It must be possible to supply an object or array with key-value pairs, where key indicates the placeholder that must be replaced by the value. <br> <b>NOTE: This code uses Twitter Bootstrap only for styling - if this is not allowed, please let me redo this work. <br>
-	NOTE: This code is not made in a object-oriented manner - if this is not allowed, please let me redo this work.</b>";
+	NOTE: This code is not made in a object-oriented manner - if this is not allowed, please let me redo this work.</b>");
 
 		// If GET request is set, use values from this.
 			if(isset($_GET['pageTitle']) && !$_GET['pageTitle'] == null){
-				$pageTitle 	= 	$_GET['pageTitle'];
+				$page->setPageTitle($_GET['pageTitle']);
 			}
 
 			if(isset($_GET['pageHeader']) && !$_GET['pageHeader'] == null){
-				$pageHeader =	$_GET['pageHeader'];
+				$page->setPageHeader($_GET['pageHeader']);
 			}
 
 			if(isset($_GET['pageText']) && !$_GET['pageText'] == null){
-				$pageText	=	$_GET['pageText'];
+				$page->setPageText($_GET['pageText']);
 			}
 
 		// If POST request is set, use values from this.
 			if(isset($_POST['pageTitle']) && !$_POST['pageTitle'] == null && $_POST['dataType'] == "post"){
-				$pageTitle 	= 	$_POST['pageTitle'];
+				$page->setPageTitle($_POST['pageTitle']);
 			}
 
 			if(isset($_POST['pageHeader']) && !$_POST['pageHeader'] == null && $_POST['dataType'] == "post"){
-				$pageHeader =	$_POST['pageHeader'];
+				$page->setPageHeader($_POST['pageHeader']);
 			}
 
 			if(isset($_POST['pageText']) && !$_POST['pageText'] == null && $_POST['dataType'] == "post"){
-				$pageText	=	$_POST['pageText'];
+				$page->setPageText($_POST['pageText']);
 			}
 
 		// if JSON object is set, use values from object. (object gottten from POST & GET)
@@ -60,15 +64,10 @@ ini_set('display_errors', '1');
 			// Setting the placeholders to values of the object.
 			if(isset($pageJsoned) && !$pageJsoned == null){
 				$pageObject =	json_decode($pageJsoned);
-				$pageTitle 	=	$pageObject->pageTitle;
-				$pageHeader	= 	$pageObject->pageHeader;
-				$pageText 	=	$pageObject->pageText;
+				$page->setPageTitle($pageObject->pageTitle);
+				$page->setPageHeader($pageObject->pageHeader);
+				$page->setPageText($pageObject->pageText);
 			}
-
-		// Remove tags (prevent XSS)
-			$pageTitle = strip_tags($pageTitle);
-			$pageHeader = strip_tags($pageHeader);
-			$pageText = strip_tags($pageText, "<br><b>"); // allow linebreak and bold (should be strong)
 
 ?>
 <!-- Defining doctype -->
